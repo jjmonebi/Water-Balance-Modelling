@@ -1,0 +1,210 @@
+﻿<Window x:Class="MWBModels.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ignore="http://www.galasoft.ch/ignore"
+        xmlns:local="clr-namespace:MWBModels.Model"
+        mc:Ignorable="d ignore"
+        MinHeight="710" WindowStartupLocation="CenterScreen"
+        MinWidth="780"
+        Height="710"
+        Width="800"
+        Title="Monthly Water Balance Models"
+        FontFamily="Verdana"
+        DataContext="{Binding Main, Source={StaticResource Locator}}">
+
+    <Window.Resources>
+        <ResourceDictionary Source="Themes\WhistlerBlue.xaml" />
+    </Window.Resources>
+
+    <Window.Background>
+        <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
+            <GradientStop Offset="0.5" Color="#FF1A3999"></GradientStop>
+            <GradientStop Offset="1.0" Color="LightGray"></GradientStop>
+        </LinearGradientBrush>
+    </Window.Background>
+
+    <Grid x:Name="LayoutRoot" MaxHeight="710"
+        MaxWidth="800">
+        <StackPanel Margin="5">
+            <GroupBox Margin="5">
+                <GroupBox.Header>
+                    <TextBlock FontSize="12" FontWeight="DemiBold">Input File</TextBlock>
+                </GroupBox.Header>
+                <Button Margin="5" FontSize="12" Command="{Binding OpenCommand}" Content="{Binding DefaultViewModel.FileName}"></Button>
+            </GroupBox>
+            <GroupBox Margin="5">
+                <GroupBox.Header>
+                    <TextBlock FontSize="12" FontWeight="DemiBold">Input Parameters</TextBlock>
+                </GroupBox.Header>
+                <Grid Margin="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Margin="2" Header="GR2M" FontSize="12">
+                        <StackPanel Margin="2">
+                            <GroupBox Margin="2" Header="Soil Moisture Reservoir Capacity" Style="{x:Null}" FontStyle="Italic" Padding="10,2,10,5">
+                                <StackPanel Margin="2">
+                                    <WrapPanel HorizontalAlignment="Center">
+                                        <TextBlock FontStyle="Normal" FontSize="11" Foreground="Black" Text="{Binding Value, ElementName=Slider21, StringFormat=N0}"/>
+                                        <TextBlock FontStyle="Normal" FontSize="11" Foreground="Black" Text=" Millimeters"/>
+                                    </WrapPanel>
+                                    <Slider Margin="2" Name="Slider21" Template="{StaticResource HorizontalSlider}" Minimum="0" Maximum="3000" Value="{Binding DefaultViewModel.x1}" Ticks="0,800,1500,2200,3000" TickPlacement="None" AutoToolTipPlacement="TopLeft"></Slider>
+                                </StackPanel>
+                            </GroupBox>
+                            <GroupBox Margin="2" Header="Parameter of the Outside Exchange" Style="{x:Null}" FontStyle="Italic" Padding="10,2,10,5">
+                                <StackPanel Margin="2">
+                                    <WrapPanel HorizontalAlignment="Center">
+                                        <TextBlock FontStyle="Normal" FontSize="11" Foreground="Black" Text="{Binding Value, ElementName=Slider22, StringFormat=N2}"/>
+                                        <TextBlock FontStyle="Normal" FontSize="11" Foreground="Black" Text=" "/>
+                                    </WrapPanel>
+                                    <Slider Margin="2" Name="Slider22" Template="{StaticResource HorizontalSlider}" Minimum="0" Maximum="1" Value="{Binding DefaultViewModel.x2}" Ticks="0,0.25,0.5,0.75,1" TickPlacement="None" AutoToolTipPlacement="TopLeft"></Slider>
+                                </StackPanel>
+                            </GroupBox>
+                            <!--<GroupBox Margin="2" Header="Evapotranspiration Efficiency" Style="{x:Null}" FontStyle="Italic" Padding="10,2,10,5">
+                                <StackPanel Margin="2">
+                                    <WrapPanel HorizontalAlignment="Center">
+                                        <TextBlock FontStyle="Normal" FontSize="11" Foreground="Black" Text="{Binding Value, ElementName=Slider23, StringFormat=N2}"/>
+                                        <TextBlock FontStyle="Normal" FontSize="11" Foreground="Black" Text=" "/>
+                                    </WrapPanel>
+                                    <Slider Margin="2" Name="Slider23" Template="{StaticResource HorizontalSlider}" Minimum="0" Maximum="10" Value="{Binding DefaultViewModel.Alpha2}" Ticks="0,2.5,5,7.5,10" TickPlacement="None" AutoToolTipPlacement="TopLeft"></Slider>
+                                </StackPanel>
+                            </GroupBox>
+                            <GroupBox Margin="2" Header="Baseflow Linear Regression" Style="{x:Null}" FontStyle="Italic" Padding="10,2,10,5">
+                                <StackPanel Margin="2">
+                                    <WrapPanel HorizontalAlignment="Center">
+                                        <TextBlock FontStyle="Normal" FontSize="11" Foreground="Black" Text="{Binding Value, ElementName=Slider24, StringFormat=N2}"/>
+                                        <TextBlock FontStyle="Normal" FontSize="11" Foreground="Black" Text=" "/>
+                                    </WrapPanel>
+                                    <Slider Margin="2" Name="Slider24" Template="{StaticResource HorizontalSlider}" Minimum="0" Maximum="1" Value="{Binding DefaultViewModel.D}" Ticks="0,.25,.5,.75,1" TickPlacement="None" AutoToolTipPlacement="TopLeft"></Slider>
+                                </StackPanel>
+                            </GroupBox>-->
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Grid.Column="1" Margin="2" Header="MTM" FontSize="12" FontWeight="Normal">
+                        <StackPanel Margin="2">
+                            <GroupBox Margin="2" Header="Soil Storage Capacity" Style="{x:Null}" FontStyle="Italic" Padding="10,2,10,5">
+                                <StackPanel Margin="2">
+                                    <WrapPanel HorizontalAlignment="Center">
+                                        <TextBlock FontStyle="Normal" FontSize="11" Foreground="Black" Text="{Binding Value, ElementName=Slider, StringFormat=N0}"/>
+                                        <TextBlock FontStyle="Normal" FontSize="11" Foreground="Black" Text=" Millimeters"/>
+                                    </WrapPanel>
+                                    <Slider Margin="2" Name="Slider" Template="{StaticResource HorizontalSlider}" Minimum="0" Maximum="1500" Value="{Binding DefaultViewModel.STC}" Ticks="0,500,1000,1500" TickPlacement="None" AutoToolTipPlacement="TopLeft"></Slider>
+                                </StackPanel>
+                            </GroupBox>
+                            <GroupBox Margin="2" Header="Runoff Factor" Style="{x:Null}" FontStyle="Italic" Padding="10,2,10,5">
+                                <StackPanel Margin="2">
+                                    <WrapPanel HorizontalAlignment="Center">
+                                        <TextBlock FontStyle="Normal" FontSize="11" Foreground="Black" Text="{Binding Value, ElementName=Slider2, StringFormat=N2}"/>
+                                        <TextBlock FontStyle="Normal" FontSize="11" Foreground="Black" Text=" "/>
+                                    </WrapPanel>
+                                    <Slider Margin="2" Name="Slider2" Template="{StaticResource HorizontalSlider}" Minimum="0" Maximum="1" Value="{Binding DefaultViewModel.RFactor}" Ticks="0,.25,.5,.75,1" TickPlacement="None" AutoToolTipPlacement="TopLeft"></Slider>
+                                </StackPanel>
+                            </GroupBox>
+                            <GroupBox Margin="2" Header="Direct Runoff Factor" Style="{x:Null}" FontStyle="Italic" Padding="10,2,10,5">
+                                <StackPanel Margin="2">
+                                    <WrapPanel HorizontalAlignment="Center">
+                                        <TextBlock FontStyle="Normal" FontSize="11" Foreground="Black" Text="{Binding Value, ElementName=Slider3, StringFormat=N2}"/>
+                                        <TextBlock FontStyle="Normal" FontSize="11" Foreground="Black" Text=" "/>
+                                    </WrapPanel>
+                                    <Slider Margin="2" Name="Slider3" Template="{StaticResource HorizontalSlider}" Minimum="0" Maximum="1" Value="{Binding DefaultViewModel.DRFactor}" Ticks="0,.25,.5,.75,1" TickPlacement="None" AutoToolTipPlacement="TopLeft"></Slider>
+                                </StackPanel>
+                            </GroupBox>
+                        </StackPanel>
+                        
+                    </GroupBox>
+                    <GroupBox Grid.Column="2" Margin="2" Header="GR5M" FontSize="12" FontWeight="Normal">
+                        <StackPanel Margin="2">
+                            <GroupBox Margin="2" Header="Soil Moisture Reservoir Capacity" Style="{x:Null}" FontStyle="Italic" Padding="10,2,10,5">
+                                <StackPanel Margin="2">
+                                    <WrapPanel HorizontalAlignment="Center">
+                                        <TextBlock FontStyle="Normal" FontSize="11" Foreground="Black" Text="{Binding Value, ElementName=Slider31, StringFormat=N0}"/>
+                                        <TextBlock FontStyle="Normal" FontSize="11" Foreground="Black" Text=" Millimeters"/>
+                                    </WrapPanel>
+                                    <Slider Margin="2" Name="Slider31" Template="{StaticResource HorizontalSlider}" Minimum="0" Maximum="3000" Value="{Binding DefaultViewModel.X1}" Ticks="0,800,1500,2200,3000" TickPlacement="None" AutoToolTipPlacement="TopLeft"></Slider>
+                                </StackPanel>
+                            </GroupBox>
+                            <GroupBox Margin="2" Header="Percolation Equation Parameter" Style="{x:Null}" FontStyle="Italic" Padding="10,2,10,5">
+                                <StackPanel Margin="2">
+                                    <WrapPanel HorizontalAlignment="Center">
+                                        <TextBlock FontStyle="Normal" FontSize="11" Foreground="Black" Text="{Binding Value, ElementName=Slider32, StringFormat=N2}"/>
+                                        <TextBlock FontStyle="Normal" FontSize="11" Foreground="Black" Text=" "/>
+                                    </WrapPanel>
+                                    <Slider Margin="2" Name="Slider32" Template="{StaticResource HorizontalSlider}" Minimum="0" Maximum="10" Value="{Binding DefaultViewModel.X2}" Ticks="0,2.5,5,7.5,10" TickPlacement="None" AutoToolTipPlacement="TopLeft"></Slider>
+                                </StackPanel>
+                            </GroupBox>
+                            <GroupBox Margin="2" Header="Direct Discharge Factor " Style="{x:Null}" FontStyle="Italic" Padding="10,2,10,5">
+                                <StackPanel Margin="2">
+                                    <WrapPanel HorizontalAlignment="Center">
+                                        <TextBlock FontStyle="Normal" FontSize="11" Foreground="Black" Text="{Binding Value, ElementName=Slider33, StringFormat=N2}"/>
+                                        <TextBlock FontStyle="Normal" FontSize="11" Foreground="Black" Text=" "/>
+                                    </WrapPanel>
+                                    <Slider Margin="2" Name="Slider33" Template="{StaticResource HorizontalSlider}" Minimum="0" Maximum="1" Value="{Binding DefaultViewModel.X3}" Ticks="0,.25,.5,.75,1" TickPlacement="None" AutoToolTipPlacement="TopLeft"></Slider>
+                                </StackPanel>
+                            </GroupBox>
+                            <GroupBox Margin="2" Header="Routing Store Capacity" Style="{x:Null}" FontStyle="Italic" Padding="10,2,10,5">
+                                <StackPanel Margin="2">
+                                    <WrapPanel HorizontalAlignment="Center">
+                                        <TextBlock FontStyle="Normal" FontSize="11" Foreground="Black" Text="{Binding Value, ElementName=Slider34, StringFormat=N2}"/>
+                                        <TextBlock FontStyle="Normal" FontSize="11" Foreground="Black" Text=" "/>
+                                    </WrapPanel>
+                                    <Slider Margin="2" Name="Slider34" Template="{StaticResource HorizontalSlider}" Minimum="0" Maximum="100" Value="{Binding DefaultViewModel.X4}" Ticks="0,25,50,75,100" TickPlacement="None" AutoToolTipPlacement="TopLeft"></Slider>
+                                </StackPanel>
+                            </GroupBox>
+                            <GroupBox Margin="2" Header="Catchment Area Correction Factor" Style="{x:Null}" FontStyle="Italic" Padding="10,2,10,5">
+                                <StackPanel Margin="2">
+                                    <WrapPanel HorizontalAlignment="Center">
+                                        <TextBlock FontStyle="Normal" FontSize="11" Foreground="Black" Text="{Binding Value, ElementName=Slider35, StringFormat=N2}"/>
+                                        <TextBlock FontStyle="Normal" FontSize="11" Foreground="Black" Text=" "/>
+                                    </WrapPanel>
+                                    <Slider Margin="2" Name="Slider35" Template="{StaticResource HorizontalSlider}" Minimum="0" Maximum="1" Value="{Binding DefaultViewModel.X5}" Ticks="0,.25,.5,.75,1" TickPlacement="None" AutoToolTipPlacement="TopLeft"></Slider>
+                                </StackPanel>
+                            </GroupBox>
+                        </StackPanel>
+                    </GroupBox>
+                </Grid>
+            </GroupBox>
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <GroupBox Margin="2">
+                    <GroupBox.Header>
+                        <TextBlock FontSize="12" FontWeight="DemiBold">Select Models</TextBlock>
+                    </GroupBox.Header>
+                    <Grid Margin="2">
+                        <WrapPanel Margin="2">
+                            <CheckBox Margin="10,2" Content="GR2M" IsChecked="{Binding DefaultViewModel.GR2M}"></CheckBox>
+                            <CheckBox Margin="10,2" Content="MTM" IsChecked="{Binding DefaultViewModel.MTM}"></CheckBox>
+                            <CheckBox Margin="10,2" Content="GR5M" IsChecked="{Binding DefaultViewModel.GR5M}"></CheckBox>
+                        </WrapPanel>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Margin="2" Grid.Column="1">
+                    <GroupBox.Header>
+                        <TextBlock FontSize="12" FontWeight="DemiBold">Output Plots</TextBlock>
+                    </GroupBox.Header>
+                    <Grid Margin="2">
+                        <WrapPanel Margin="2">
+                            <CheckBox Margin="10,2" Content="Precipitation" IsChecked="{Binding DefaultViewModel.PRE}"></CheckBox>
+                            <CheckBox Margin="10,2" Content="PET" IsChecked="{Binding DefaultViewModel.PET}"></CheckBox>
+                            <CheckBox Margin="10,2" Content="AET" IsChecked="{Binding DefaultViewModel.AET}"></CheckBox>
+                            <CheckBox Margin="10,2" Content="Soil Moisture" IsChecked="{Binding DefaultViewModel.SMC}"></CheckBox>
+                            <CheckBox Margin="10,2" Content="Runoff" IsChecked="{Binding DefaultViewModel.Runoff}"></CheckBox>
+                        </WrapPanel>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+            <GroupBox Margin="5">
+                <GroupBox.Header>
+                    <TextBlock FontSize="12" FontWeight="DemiBold">Run</TextBlock>
+                </GroupBox.Header>
+                <Button Margin="5" FontSize="12" Command="{Binding RunCommand}">Run Models</Button>
+            </GroupBox>
+        </StackPanel>
+    </Grid>
+</Window>
